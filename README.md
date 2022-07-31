@@ -34,8 +34,8 @@ pip install -r requirements.txt
 ## Enviroment Variables
 
 __.flaskenv__ file contains enviroment variables for flask, such as:
-..* `~FLASK_ENV=development` to run server in development mode 
-..* `~FLASK_APP=manage` to run server from a specific file
+* `FLASK_ENV=development` to run server in development mode 
+* `FLASK_APP=manage` to run server from a specific file
 
 So by exporting the last one it becomes possible to run server simply with a command:
 ```
@@ -46,7 +46,7 @@ Instead of specifying the file name in a command.
 
 There are also __.env__ file in use, whitch wasn't pushed to the repo.
 This file contains the next varibles:
-..* `~SECRET_KEY=` - contains secret key for flask
+* `SECRET_KEY=` - contains secret key for flask
 
 
 ## Code
