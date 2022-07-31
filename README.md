@@ -12,17 +12,23 @@ The __Pipifile__ and __Pipfile.lock__ files contains info about project dependen
 To install all dependencies form a __Pipifile__ the __pipenv__ package required.
 
 Install the __pipenv__ package:
-    pip install pipenv
+```
+pip install pipenv
+```
 
 Once __pipenv__ is installed, 
 the following command will create virtual enviroment and install all project dependencies:
-    pipenv install
+```
+pipenv install
+```
 
 
 ## Dependencies [pip]
 
 To install all dependencies form a __requirements.txt__ file enter the following command:
-    pip install -r requirements.txt
+```
+pip install -r requirements.txt
+```
 
 
 ## Enviroment Variables
@@ -32,7 +38,9 @@ __.flaskenv__ file contains enviroment variables for flask, such as:
 ..* `~FLASK_APP=manage` to run server from a specific file
 
 So by exporting the last one it becomes possible to run server simply with a command:
-    flask run
+```
+flask run
+```
 Instead of specifying the file name in a command.
 
 
