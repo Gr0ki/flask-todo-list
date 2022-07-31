@@ -3,7 +3,7 @@
 
 ## API
 
-[Docs for an API](https://documenter.getpostman.com/view/22115905/UzdzTk6e)
+[📚 Documentation 📚](https://documenter.getpostman.com/view/22115905/UzdzTk6e)
 
 
 ## Dependencies [pipenv]
