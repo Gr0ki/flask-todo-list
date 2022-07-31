@@ -1,7 +1,9 @@
 from flask import Flask
 
 from src.extensions import db, ma
-from src.tasks import api_bp
+
+# from src.tasks import tasks_bp
+from src.api import api_v1_bp
 
 
 def create_app(test_config=None):
@@ -11,7 +13,8 @@ def create_app(test_config=None):
 
     register_extentions(app)
 
-    app.register_blueprint(api_bp, url_prefix="/api")
+    # app.register_blueprint(tasks_bp, url_prefix="/tasks")
+    app.register_blueprint(api_v1_bp, url_prefix="/api/v1")
 
     return app
 

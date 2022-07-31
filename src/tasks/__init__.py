@@ -1,5 +1,5 @@
 from flask import Blueprint
 
-api_bp = Blueprint("api", __name__, url_prefix="/api")
+# tasks_bp = Blueprint("tasks", __name__, url_prefix="tasks")
 
 from .views import *
