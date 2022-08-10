@@ -10,7 +10,6 @@ from .. import api_v1_auth_bp
 
 @api_v1_auth_bp.route("/register", methods=["POST"])
 def register():
-    # TODO: check for errors
     # take data for registration
     data = request.get_json()
     try:
@@ -35,7 +34,6 @@ def register():
 
 @api_v1_auth_bp.route("/login", methods=["POST"])
 def login():
-    # TODO: check for errors
     # take login data
     data = request.get_json()
     try:
