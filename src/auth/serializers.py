@@ -10,8 +10,8 @@ from .models import User
 class RegisterUserSchema(ma.Schema):
     id = fields.Integer(dump_only=True)
     username = fields.String(required=False)
-    email = fields.String(required=True)
-    password = fields.String(required=True, load_only=True)
+    email = fields.String(required=True)  # COMMENT: consider Email field
+    password = fields.String(required=True, load_only=True, attribute="password_hash")
     last_login = fields.DateTime(dump_only=True)
 
     @validates("password")
@@ -40,7 +40,6 @@ class RegisterUserSchema(ma.Schema):
     def process_input(self, data, **kwargs):
         data["last_login"] = datetime.now()
         data["email"] = data["email"].lower().strip()
-        data["password"] = data["password"]  # TODO: add hashing
         if "username" not in data.keys() and "email" in data.keys():
             data["username"] = data["email"][: data["email"].find("@")]
         return User(**data)
@@ -49,15 +48,15 @@ class RegisterUserSchema(ma.Schema):
 class UserSchema(ma.Schema):
     id = fields.Integer(dump_only=True)
     username = fields.String(dump_only=True)
-    email = fields.String(required=True)
-    password = fields.String(required=True, load_only=True)
+    email = fields.String(required=True)  # COMMENT: consider Email field
+    password = fields.String(required=True, load_only=True, attribute="password_hash")
     last_login = fields.DateTime(dump_only=True)
 
     @post_load
     def process_input(self, data, **kwargs):
         data["last_login"] = datetime.now()
         data["email"] = data["email"].lower().strip()
-        data["password"] = data["password"]  # TODO: add hashing
+        # COMMENT: unhashed password to verify in the endpoint
         return User(**data)
 
 
