@@ -4,7 +4,7 @@ from marshmallow import ValidationError
 
 
 from ...auth.models import User, db
-from ...auth.serializers import user_schema
+from ...auth.serializers import user_schema, register_user_schema
 from .. import api_v1_auth_bp
 
 
@@ -14,7 +14,7 @@ def register():
     data = request.get_json()
     try:
         # deserialize
-        deserialized_data = user_schema.load(data)
+        deserialized_data = register_user_schema.load(data)
     except ValidationError as err:
         # handle deserialize exception
         return jsonify(message=err.messages), 400 if len(data) == 0 else 422
@@ -34,15 +34,25 @@ def register():
 @api_v1_auth_bp.route("/login", methods=["POST"])
 def login():
     # take login data
-    email = request.json["email"]
-    password = request.json["password"]
+    data = request.get_json()
+    try:
+        # deserialize
+
+        deserialized_data = user_schema.load(data)
+        email = deserialized_data.email
+        password = deserialized_data.password
+    except ValidationError as err:
+        # handle deserialize exception
+        return jsonify(message=err.messages), 400 if len(data) == 0 else 422
 
     # check if login data match any user in the db
-    test = User.query.filter_by(email=email, password=password).first()
-    if test == None:
+    user = User.query.filter_by(email=email, password=password).first()
+    if user == None:
         # return error
         return jsonify(message="Wrong login or password."), 401
     else:
         # return success message and JWT success token
-        access_token = create_access_token(identity=test.id)
+        access_token = create_access_token(identity=user.id)
+        user.last_login = deserialized_data.last_login
+        db.session.commit()
         return jsonify(message="Login succeeded.", access_token=access_token), 200
