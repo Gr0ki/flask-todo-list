@@ -51,8 +51,7 @@ This file contains the next varibles:
 
 ## Code
 
-The `~src` folder contains source code for the Flask REST API.
-
+The `~src` folder contains source code for the Flask REST API:
 * `auth` and `tasks` folders contain models for database and serializers schemas for endpoints.
 * `api` folder contains versions of API.
 
