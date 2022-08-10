@@ -9,6 +9,7 @@ flask-sqlalchemy = "*"
 flask-marshmallow = "*"
 marshmallow-sqlalchemy = "*"
 python-dotenv = "*"
+flask-jwt-extended = "*"
 
 [dev-packages]
 black = "*"
