@@ -31,7 +31,7 @@ pip install -r requirements.txt
 ```
 
 
-## Enviroment Variables
+## Enviroment Variables and starting the server
 
 __.flaskenv__ file contains enviroment variables for flask, such as:
 * `FLASK_ENV=development` to run server in development mode 
