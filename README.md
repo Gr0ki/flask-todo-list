@@ -43,6 +43,11 @@ flask run
 ```
 Instead of specifying the file name in a command.
 
+But don't forget to create the database:
+```
+flask db_create
+```
+
 
 There are also __.env__ file in use, whitch wasn't pushed to the repo.
 This file contains the next varibles:
