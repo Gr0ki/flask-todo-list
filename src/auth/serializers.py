@@ -34,7 +34,7 @@ class RegisterUserSchema(ma.Schema):
             # [^@]+ - 1 or more of any symbol exept "@"
             # \. - "."
             # @ - "@"
-            raise ma.ValidationError("Invalid email format.")
+            raise ValidationError("Invalid email format.")
 
     @post_load
     def process_input(self, data, **kwargs):
