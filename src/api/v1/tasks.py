@@ -7,23 +7,20 @@ from ...tasks.serializers import task_schema, tasks_schema
 from .. import api_v1_tasks_bp
 
 
-@api_v1_tasks_bp.route("/")
+@api_v1_tasks_bp.route("/", methods=["GET", "POST"])
 @jwt_required()
-def task_list():
-    user_id = get_jwt_identity()
-    # get item from db
-    query_result = Task.query.filter_by(user_id=user_id).all()
-    if query_result == []:
-        return jsonify(message="The tasks don't exist yet!"), 404
-    # serialize
-    serialized_result = tasks_schema.dump(query_result)
-    # return json
-    return jsonify(serialized_result)
+def tasks_get_create():
+    if request.method == "GET":
+        user_id = get_jwt_identity()
+        # get item from db
+        query_result = Task.query.filter_by(user_id=user_id).all()
+        if query_result == []:
+            return jsonify(message="The tasks don't exist yet!"), 404
+        # serialize
+        serialized_result = tasks_schema.dump(query_result)
+        # return json
+        return jsonify(serialized_result)
 
-
-@api_v1_tasks_bp.route("/new", methods=["POST"])
-@jwt_required()
-def create_task():
     if request.method == "POST":
         # get request data
         data = request.get_json()
