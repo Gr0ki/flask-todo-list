@@ -7,7 +7,7 @@ from src.extensions import db, jwt, ma
 def create_app(test_config=None):
     # create and configure the app
     app = Flask(__name__)
-    app.config.from_object("src.config.DevelopmentConfig")
+    app.config.from_object("src.config.ProductionConfig")
 
     register_extentions(app)
 

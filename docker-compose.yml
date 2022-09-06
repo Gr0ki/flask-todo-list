@@ -1,0 +1,12 @@
+version: '3.8'
+
+services:
+  flask:
+    build: .
+    container_name: Flask
+    environment:
+      - SECRET_KEY=${SECRET_KEY}
+      - JWT_SECRET_KEY=${JWT_SECRET_KEY}
+    ports:
+      - "5000:5000"
+    command: sh -c "flask db_create && flask run"
