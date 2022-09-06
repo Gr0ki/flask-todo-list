@@ -51,7 +51,8 @@ flask db_create
 
 There are also __.env__ file in use, whitch wasn't pushed to the repo.
 This file contains the next varibles:
-* `SECRET_KEY=` - contains secret key for flask
+* `SECRET_KEY=` - contains secret key for Flask
+* `JWT_SECRET_KEY=` - contains secret key for Flask-JWT-Extended
 
 
 ## Code
