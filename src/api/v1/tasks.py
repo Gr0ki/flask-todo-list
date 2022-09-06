@@ -23,7 +23,10 @@ def tasks_get_create():
 
     if request.method == "POST":
         # get request data
-        data = request.get_json()
+        if request.is_json is True:
+            data = request.get_json()
+        else:
+            data = request.form.to_dict()
         try:
             # deserialize
             deserialized_data = task_schema.load(data)
@@ -74,23 +77,26 @@ def task_detailed(task_id: int):
             )
 
         # get request data
-        data = request.get_json()
+        if request.is_json is True:
+            data = request.get_json()
+        else:
+            data = request.form.to_dict()
         # validate data
         try:
             # deserialize
-            _ = task_schema.load(data)
+            desirialized_data = task_schema.load(data)
+            print(type(data), dir(data))
         except ValidationError as err:
             # handle deserialize exceptions
             return jsonify(message=err.messages), 400 if len(data) == 0 else 422
-        # _ = get_deserialized_data(data, task_schema)
 
         # update data before updating db
         if "title" in data.keys():
-            query_result.title = data["title"]
+            query_result.title = desirialized_data.title
         if "notes" in data.keys():
-            query_result.notes = data["notes"]
+            query_result.notes = desirialized_data.notes
         if "is_done" in data.keys():
-            query_result.is_done = data["is_done"]
+            query_result.is_done = desirialized_data.is_done
         # update db with updated data
         db.session.commit()
         # serialize data

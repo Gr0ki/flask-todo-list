@@ -11,7 +11,10 @@ from .. import api_v1_auth_bp
 @api_v1_auth_bp.route("/register", methods=["POST"])
 def register():
     # take data for registration
-    data = request.get_json()
+    if request.is_json is True:
+        data = request.get_json()
+    else:
+        data = request.form.to_dict()
     try:
         # deserialize
         deserialized_data = register_user_schema.load(data)
@@ -35,7 +38,10 @@ def register():
 @api_v1_auth_bp.route("/login", methods=["POST"])
 def login():
     # take login data
-    data = request.get_json()
+    if request.is_json is True:
+        data = request.get_json()
+    else:
+        data = request.form.to_dict()
     try:
         # deserialize
         deserialized_data = user_schema.load(data)
